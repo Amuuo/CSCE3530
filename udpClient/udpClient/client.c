@@ -50,7 +50,7 @@ int main(int argc, char** argv)
   else if (argc > 2 && argv[2] == "-h")
   {    
     host = gethostbyname(argv[3]); 
-    bcopy((char*)host->h_addr_list[0], (char*)&svr_addr.sin_addr.s_addr, host->h_length);
+      
   }
   else
   {
