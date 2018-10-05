@@ -37,17 +37,26 @@ int main(int argc, char** argv)
 	svr_addr.sin_port   = htons(atoi(argv[1]));
 	svr_addr.sin_family = AF_INET;
 	
-  if(argc > 3 || argv[2] == "-i")
+  int i;
+  printf("\nargc: %d", argc);
+  for (i = 0; i < argc; ++i) {
+    printf("\nargv[%d]: %s", i, argv[i]);
+  }
+
+  if(argc > 2 && argv[2] == "-i")
+  {
     svr_addr.sin_addr.s_addr = inet_addr(argv[3]);  
-  else if (argv[2] == "-h")
+  }
+  else if (argc > 2 && argv[2] == "-h")
   {    
     host = gethostbyname(argv[3]); 
-    struct in_addr** addr_list;
-    addr_list = host->h_addr_list;    
-    svr_addr.sin_addr.s_addr = inet_addr(inet_ntoa(*addr_list[0]));
+    bcopy((char*)host->h_addr_list[0], (char*)&svr_addr.sin_addr.s_addr, host->h_length);
+    svr_addr.sin_addr.s_addr = htonl(INADDR_ANY);
   }
   else
+  {
     svr_addr.sin_addr.s_addr = INADDR_ANY;
+  }
 
   
   // create socket  
