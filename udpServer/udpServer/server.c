@@ -48,7 +48,7 @@ int main(int argc, char** argv)
   struct hostent* host = gethostbyname("localhost");
   int i;
   
-  for(i = 0; i != NULL; ++i)
+  for(i = 0; host->h_addr_list[i] != NULL; ++i)
     printf("\nMy ip: %s", host->h_addr_list[i]);
   
 
