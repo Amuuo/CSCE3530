@@ -43,6 +43,7 @@ int main(int argc, char** argv)
   {    
     host = gethostbyname(argv[3]);    
     bcopy((char*)host->h_addr_list[0], (char*)&svr_addr.sin_addr.s_addr, host->h_length);
+    svr_addr.sin_addr.s_addr = INADDR_ANY;
   }
   else
     svr_addr.sin_addr.s_addr = INADDR_ANY;
