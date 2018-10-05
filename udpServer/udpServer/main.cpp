@@ -49,11 +49,12 @@ int main(int argc, char** argv){
        (struct sockaddr*)&SVR_ADDR, 
        sizeof(SVR_ADDR));
 	
-  cout << "\nBound to socket...\nWaiting for messages from client...";
+  cout << "\nBound to socket...";
 
 
 	while(1){
-	    
+
+    cout << "\nWaiting for messages from client..." << endl;  
 		// receive message from client
 		msgLength2 = recvfrom(SOCK, 
                           (char*)msgBuffer, 
@@ -80,7 +81,7 @@ int main(int argc, char** argv){
            (struct sockaddr*)&CLI_ADDR,
            msgLength);			   
 		
-    cout << "\nServer: " << msgBufferStr;
+    cout << "\nServer: " << msgBufferStr << endl;
 	}
 
   memset(msgBuffer, 0, 256);
