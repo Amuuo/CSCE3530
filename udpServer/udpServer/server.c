@@ -37,21 +37,16 @@ int main(int argc, char** argv)
   // setup server address parameters
 	svr_addr.sin_family      = AF_INET;
 	svr_addr.sin_port        = htons(atoi(argv[1]));
-  svr_addr.sin_addr.s_addr = INADDR_ANY;
+  
+  struct hostent* host = gethostbyname("cse01.cse.unt.edu"); 
+  bcopy((char*)host->h_addr_list[0], (char*)&svr_addr.sin_addr.s_addr, host->h_length);
+  //svr_addr.sin_addr.s_addr = INADDR_ANY;
   	     
 	
   // create socket and bind to port  
   sock = socket(AF_INET, SOCK_DGRAM, 0);		
   bind(sock, (struct sockaddr*)&svr_addr, sizeof(svr_addr));
 	  
-
-  struct hostent* host = gethostbyname("cse01.cse.unt.edu");
-  struct in_addr** addr_list;
-  addr_list = host->h_addr_list;
-
-  for(i = 0; addr_list[i] != NULL; ++i)
-    printf("\nMy ip: %s", inet_ntoa(*addr_list[i]));
-  
 
 	while(1)
   {
