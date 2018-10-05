@@ -6,6 +6,7 @@
 #include <sys/socket.h> 
 #include <arpa/inet.h> 
 #include <netinet/in.h>
+#include <netdb.h>
 
 typedef struct sockaddr_in sockaddr_in;
 typedef struct sockaddr sockaddr;
@@ -39,9 +40,9 @@ int main(int argc, char** argv)
   if(argc > 3 || argv[2] == "-i")
     svr_addr.sin_addr.s_addr = inet_addr(argv[3]);  
   else if (argv[2] == "-h")
-  {
-    struct in_addr **addr_list = gethostname(argv[3], sizeof(argv[3]));    
-    svr_addr.sin_addr.s_addr   = inet_addr(inet_ntoa(*addr_list[0]));
+  {    
+    host = gethostbyname(argv[3]);    
+    bcopy((char*)host->h_addr_list[0], (char*)&svr_addr.sin_addr.s_addr, host->h_length);
   }
   else
     svr_addr.sin_addr.s_addr = INADDR_ANY;
