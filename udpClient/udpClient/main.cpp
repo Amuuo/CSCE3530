@@ -53,7 +53,7 @@ int main(int argc, char** argv){
              (struct sockaddr*)&SVR_ADDR, 
              &msgLength);
 
-    cout << "\nServer: " << msgBuffer;
+    cout << "Server: " << msgBuffer;
 
     memset(msgBuffer, 0, 256);
     message.clear();

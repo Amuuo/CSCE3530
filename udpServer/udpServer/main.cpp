@@ -45,9 +45,7 @@ int main(int argc, char** argv){
 	cout << "\nSocket created...";
 
   // bind to socket
-	bind(SOCK, 
-       (struct sockaddr*)&SVR_ADDR, 
-       sizeof(SVR_ADDR));
+	bind(SOCK, (struct sockaddr*)&SVR_ADDR, sizeof(SVR_ADDR));
 	
   cout << "\nBound to socket...\nWaiting for messages from client...";
 
@@ -65,7 +63,7 @@ int main(int argc, char** argv){
 		msgBuffer[msgLength2] = '\0';
 		cout << "\nClient: " << msgBuffer;
 		
-		// copy cstring to std::string and transform chars				
+		// copy cstring to std::string and transform chars to uppercase				
     msgBufferStr = string{msgBuffer};		
 		transform(msgBufferStr.begin(), 
               msgBufferStr.end(), 
