@@ -19,7 +19,7 @@ typedef struct sockaddr sockaddr;
 int main(int argc, char** argv)
 {
 	
-  if (argc < 2 || argc > 2) 
+  if (argc < 2 || argc > 3) 
   {
     printf("\nUsage: <port #>");
     exit(1);
