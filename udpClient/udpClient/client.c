@@ -9,7 +9,7 @@
 
 typedef struct sockaddr_in sockaddr_in;
 typedef struct sockaddr sockaddr;
-
+typedef struct hostent hostent;
 #define BUFFER_LENGTH 256
 
 
@@ -25,7 +25,7 @@ int main(int argc, char** argv)
     exit(1);
   }
 
-
+  hostent*    host;
   sockaddr_in svr_addr;
   socklen_t   msgLength;
 	char        msgBuffer[BUFFER_LENGTH];
@@ -40,8 +40,8 @@ int main(int argc, char** argv)
     svr_addr.sin_addr.s_addr = inet_addr(argv[3]);  
   else if (argv[2] == "-h")
   {
-    hostname_to_ip(argv[3], ip);
-    svr_addr.sin_addr.s_addr = inet_addr(ip);
+    struct in_addr **addr_list = gethostname(argv[3], sizeof(argv[3]));    
+    svr_addr.sin_addr.s_addr   = inet_addr(inet_ntoa(*addr_list[0]));
   }
   else
     svr_addr.sin_addr.s_addr = INADDR_ANY;
