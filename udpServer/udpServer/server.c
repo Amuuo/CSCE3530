@@ -38,7 +38,7 @@ int main(int argc, char** argv)
 	svr_addr.sin_family      = AF_INET;
 	svr_addr.sin_port        = htons(atoi(argv[1]));
   
-  struct hostent* host = gethostbyname("cse01.cse.unt.edu"); 
+  struct hostent* host = gethostbyname(argv[2]); 
   bcopy((char*)host->h_addr_list[0], (char*)&svr_addr.sin_addr.s_addr, host->h_length);
   //svr_addr.sin_addr.s_addr = INADDR_ANY;
   	     
