@@ -41,9 +41,10 @@ int main(int argc, char** argv)
     svr_addr.sin_addr.s_addr = inet_addr(argv[3]);  
   else if (argv[2] == "-h")
   {    
-    host = gethostbyname(argv[3]);    
-    bcopy((char*)host->h_addr_list[0], (char*)&svr_addr.sin_addr.s_addr, host->h_length);
-    svr_addr.sin_addr.s_addr = INADDR_ANY;
+    host = gethostbyname(argv[3]); 
+    struct in_addr** addr_list;
+    addr_list = host->h_addr_list;    
+    svr_addr.sin_addr.s_addr = inet_addr(inet_ntoa(*addr_list[0]));
   }
   else
     svr_addr.sin_addr.s_addr = INADDR_ANY;
