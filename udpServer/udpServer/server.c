@@ -45,7 +45,7 @@ int main(int argc, char** argv)
   bind(sock, (struct sockaddr*)&svr_addr, sizeof(svr_addr));
 	  
 
-  struct hostent* host = gethostbyname("localhost");
+  struct hostent* host = gethostbyname("cse01.cse.unt.edu");
   
   struct in_addr** addr_list;
   addr_list = host->h_addr_list;
