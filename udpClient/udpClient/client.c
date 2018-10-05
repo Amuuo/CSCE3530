@@ -51,15 +51,15 @@ int main(int argc, char** argv)
   {		
     memset(msgBuffer, 0, BUFFER_LENGTH);    
 		printf("\n\nEnter message: ");
-		gets(msgBuffer);         
+		gets(msgBuffer);     
+
 		
 		sendto(sock, (char*)msgBuffer, strlen(msgBuffer)+1, MSG_CONFIRM, 
            (struct sockaddr*)&svr_addr, sizeof(svr_addr));
-		printf("\033\033");
-    printf("Sent: %s", msgBuffer);	   
-		
-    recvfrom(sock, (char*)msgBuffer, BUFFER_LENGTH, MSG_WAITALL, 
+			   
+		recvfrom(sock, (char*)msgBuffer, BUFFER_LENGTH, MSG_WAITALL, 
              (struct sockaddr*)&svr_addr, &msgLength);
+    
     printf("Server: %s", msgBuffer);
 	}
 
