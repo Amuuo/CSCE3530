@@ -6,6 +6,7 @@
 #include <sys/socket.h> 
 #include <arpa/inet.h> 
 #include <netinet/in.h>
+#include <netdb.h>
 
 typedef struct sockaddr_in sockaddr_in;
 typedef struct sockaddr sockaddr;
@@ -44,7 +45,12 @@ int main(int argc, char** argv)
   bind(sock, (struct sockaddr*)&svr_addr, sizeof(svr_addr));
 	  
 
-  printf("\nMy ip: %s", svr_addr.sin_addr.s_addr);
+  struct hostent* host = gethostbyname("localhost");
+  int i;
+  
+  for(i = 0; i != NULL; ++i)
+    printf("\nMy ip: %s", host->h_addr_list[i]);
+  
 
 	while(1)
   {
