@@ -44,7 +44,7 @@ int main(int argc, char** argv)
   bind(sock, (struct sockaddr*)&svr_addr, sizeof(svr_addr));
 	  
 
-
+  printf("\nMy ip: %s", svr_addr.sin_addr.s_addr);
 
 	while(1)
   {
