@@ -6,10 +6,11 @@
 #include <sys/socket.h> 
 #include <arpa/inet.h> 
 #include <netinet/in.h>
+#include <netdb.h> 
 
 typedef struct sockaddr_in sockaddr_in;
 typedef struct sockaddr sockaddr;
-
+typedef struct hostent hostent;
 #define BUFFER_LENGTH 256
 
 
@@ -18,16 +19,25 @@ typedef struct sockaddr sockaddr;
 int main(int argc, char** argv) 
 {
 
+  if (argc < 3 || argc > 3) 
+  {
+    printf("\nUsage: hostname <port #>");
+    exit(1);
+  }
+
   sockaddr_in svr_addr;
   socklen_t   msgLength;
   char        msgBuffer[BUFFER_LENGTH];
   int         sock;
+  hostent*    server;
 
-
+  server = gethostbyname(argv[1]);
+  
   // setup server address parameters
-  svr_addr.sin_port        = htons(atoi(argv[1]));
+  bzero((char*)&svr_addr,sizeof(svr_addr));
+  bcopy((char*)server->h_addr_list[0],(char*)&svr_addr.sin_addr.s_addr,server->h_length);
   svr_addr.sin_family      = AF_INET;
-  svr_addr.sin_addr.s_addr = INADDR_ANY;
+  svr_addr.sin_port        = htons(atoi(argv[2]));  
 
   
   // create socket  

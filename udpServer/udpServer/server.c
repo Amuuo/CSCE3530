@@ -9,7 +9,6 @@
 
 typedef struct sockaddr_in sockaddr_in;
 typedef struct sockaddr sockaddr;
-
 #define BUFFER_LENGTH 256
 
 
