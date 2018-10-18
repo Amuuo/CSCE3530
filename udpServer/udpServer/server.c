@@ -48,10 +48,11 @@ int main(int argc, char** argv)
   {
     memset(msgBuffer, 0, BUFFER_LENGTH);
     printf("\n\nWaiting for messages from client...");
+    fflush(stdout);
 
     recvfrom(sock, (char*)msgBuffer, BUFFER_LENGTH, MSG_WAITALL,
              (struct sockaddr*)&cli_addr, &msgLength);
-    printf("\n\n\tMessage received: %s", msgBuffer);
+    printf("\n\nMessage received: %s", msgBuffer);
 
 
     for (i = 0; i < strlen(msgBuffer); ++i)     
@@ -60,7 +61,7 @@ int main(int argc, char** argv)
 
     sendto(sock, (char*)msgBuffer, strlen(msgBuffer), MSG_CONFIRM,
            (struct sockaddr*)&cli_addr, msgLength);
-    printf("\n\tMessage sent: %s\n", msgBuffer);
+    printf("\nMessage sent: %s\n", msgBuffer);
   }
 
   
