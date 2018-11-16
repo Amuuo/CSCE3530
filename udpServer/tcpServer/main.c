@@ -9,6 +9,9 @@
 #include <sys/socket.h> 
 #include <arpa/inet.h> 
 #include <netinet/in.h>
+#include <netinet/ip.h>
+#include <sys/stat.h>
+#include <netdb.h> 
 
 typedef struct sockaddr_in sockaddr_in;
 typedef struct sockaddr sockaddr;
@@ -32,7 +35,6 @@ int main(int argc, char** argv)
   int         client_sock;
   int         tmp;
   char        msgBuffer[256];
-  socklen_t   msgLength = sizeof(struct sockaddr);
   socklen_t   length;
   sockaddr_in svr_addr;
   sockaddr_in cli_addr;
@@ -43,14 +45,16 @@ int main(int argc, char** argv)
   svr_addr.sin_port        = htons(atoi(argv[1]));
   svr_addr.sin_addr.s_addr = INADDR_ANY;
 
-  socklen_t   c = sizeof(cli_addr);
 
   // create socket and bind to port  
   sock = socket(AF_INET, SOCK_STREAM, 0);
-  tmp = bind(sock, (struct sockaddr*)&svr_addr, length);
-  tmp = listen(sock, 1);
+  bind(sock, (sockaddr*)&svr_addr, length);
+  listen(sock, 1);
   printf("\nListening to socket...\n");
-  client_sock = accept(sock, (struct sockaddr*)&cli_addr, &c);
+  
+  socklen_t   c = sizeof(sockaddr_in);
+  client_sock = accept(sock, (sockaddr*)&cli_addr, &c);
+  
   printf("\nAccepted client...\n");
 
   while(1)
@@ -60,7 +64,7 @@ int main(int argc, char** argv)
     fflush(stdout);
 
     
-    recv(tmp, (char*)msgBuffer, BUFFER_LENGTH, MSG_WAITALL);
+    recv(client_sock, (char*)msgBuffer, BUFFER_LENGTH, MSG_WAITALL);
     printf("\n\nMessage received: %s\n", msgBuffer);
 
 
@@ -68,7 +72,7 @@ int main(int argc, char** argv)
       msgBuffer[i] = tolower(msgBuffer[i]);    
 
 
-    send(tmp, (char*)msgBuffer,BUFFER_LENGTH, 0);
+    send(client_sock, (char*)msgBuffer,BUFFER_LENGTH, 0);
     printf("\nMessage sent: %s\n", msgBuffer);
   }
 
