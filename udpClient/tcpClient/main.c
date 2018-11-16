@@ -47,7 +47,7 @@ int main(int argc, char** argv)
   
   // create socket  
   sock = socket(AF_INET, SOCK_STREAM, 0);
-  connect(sock, (sockaddr*)&svr_addr, sizeof(sockaddr));
+  connect(sock, (sockaddr*)&svr_addr, sizeof(svr_addr));
 
 
 
