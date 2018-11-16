@@ -54,7 +54,7 @@ int main(int argc, char** argv)
     gets(msgBuffer);     
 
 
-    send(sock, (char*)msgBuffer, BUFFER_LENGTH, 0);
+    send(sock, (char*)msgBuffer, strlen(msgBuffer), 0);
    
     recv(sock, (char*)msgBuffer, BUFFER_LENGTH, 0);
     

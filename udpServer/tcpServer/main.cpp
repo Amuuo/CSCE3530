@@ -51,15 +51,15 @@ int main(int argc, char** argv)
   svr_addr.sin_port        = htons(atoi(argv[1]));
   svr_addr.sin_addr.s_addr = INADDR_ANY;
 
-  socklen_t   c = sizeof(svr_addr);
+  socklen_t   c = sizeof(cli_addr);
 
   // create socket and bind to port  
   sock = socket(AF_INET, SOCK_STREAM, 0);
   tmp = bind(sock, (struct sockaddr*)&svr_addr, length);
   tmp = listen(sock, 1);
-  printf("\nListening to socket...");
+  std::cout << "\nListening to socket..." << std::endl;
   client_sock = accept(sock, (sockaddr*)&cli_addr, &c);
-  printf("\nAccepted client...");
+  std::cout << "\nAccepted client..." << std::endl;
 
   while(1)
   {
@@ -69,7 +69,7 @@ int main(int argc, char** argv)
 
     
     recv(tmp, (char*)msgBuffer, BUFFER_LENGTH, MSG_WAITALL);
-    printf("\n\nMessage received: %s", msgBuffer);
+    std::cout << "\n\nMessage received: " << msgBuffer << std::endl;
 
 
     for (i = 0; i < strlen(msgBuffer); ++i)     
@@ -77,7 +77,7 @@ int main(int argc, char** argv)
 
 
     send(tmp, (char*)msgBuffer,BUFFER_LENGTH, 0);
-    printf("\nMessage sent: %s\n", msgBuffer);
+    std::cout << "\nMessage sent: " << msgBuffer << std::endl;
   }
 
   
