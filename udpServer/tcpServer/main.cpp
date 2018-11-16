@@ -7,7 +7,7 @@ Copyright   : October 15, 2018
 ============================================================================
 */
 
-
+#include <iostream>
 #include <stdio.h> 
 #include <ctype.h>
 #include <stdlib.h> 
@@ -63,7 +63,7 @@ int main(int argc, char** argv)
   while(1)
   {
     memset(msgBuffer, 0, BUFFER_LENGTH);
-    printf("\n\nWaiting for messages from client...");
+    std::cout << "\n\nWaiting for messages from client..." << std::endl;
     fflush(stdout);
 
     
