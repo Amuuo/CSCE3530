@@ -39,9 +39,9 @@ int main(int argc, char** argv)
   int         sock;
   int         client_sock;
   int         tmp;
-  socklen_t   c;
   char        msgBuffer[256];
   socklen_t   msgLength = sizeof(sockaddr);
+  socklen_t   length;
   sockaddr_in svr_addr;
   sockaddr_in cli_addr;
 
@@ -51,10 +51,11 @@ int main(int argc, char** argv)
   svr_addr.sin_port        = htons(atoi(argv[1]));
   svr_addr.sin_addr.s_addr = INADDR_ANY;
 
+  socklen_t   c = sizeof(svr_addr);
 
   // create socket and bind to port  
   sock = socket(AF_INET, SOCK_STREAM, 0);
-  tmp = bind(sock, (struct sockaddr*)&svr_addr, sizeof(svr_addr));
+  tmp = bind(sock, (struct sockaddr*)&svr_addr, length);
   tmp = listen(sock, 1);
   printf("\nListening to socket...");
   client_sock = accept(sock, (sockaddr*)&cli_addr, &c);
