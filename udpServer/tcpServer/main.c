@@ -7,7 +7,6 @@ Copyright   : October 15, 2018
 ============================================================================
 */
 
-#include <iostream>
 #include <stdio.h> 
 #include <ctype.h>
 #include <stdlib.h> 
@@ -40,7 +39,7 @@ int main(int argc, char** argv)
   int         client_sock;
   int         tmp;
   char        msgBuffer[256];
-  socklen_t   msgLength = sizeof(sockaddr);
+  socklen_t   msgLength = sizeof(struct sockaddr);
   socklen_t   length;
   sockaddr_in svr_addr;
   sockaddr_in cli_addr;
@@ -57,19 +56,19 @@ int main(int argc, char** argv)
   sock = socket(AF_INET, SOCK_STREAM, 0);
   tmp = bind(sock, (struct sockaddr*)&svr_addr, length);
   tmp = listen(sock, 1);
-  std::cout << "\nListening to socket..." << std::endl;
-  client_sock = accept(sock, (sockaddr*)&cli_addr, &c);
-  std::cout << "\nAccepted client..." << std::endl;
+  printf("\nListening to socket...\n");
+  client_sock = accept(sock, (struct sockaddr*)&cli_addr, &c);
+  printf("\nAccepted client...\n");
 
   while(1)
   {
     memset(msgBuffer, 0, BUFFER_LENGTH);
-    std::cout << "\n\nWaiting for messages from client..." << std::endl;
+    printf("\n\nWaiting for messages from client...\n");
     fflush(stdout);
 
     
     recv(tmp, (char*)msgBuffer, BUFFER_LENGTH, MSG_WAITALL);
-    std::cout << "\n\nMessage received: " << msgBuffer << std::endl;
+    printf("\n\nMessage received: %s\n", msgBuffer);
 
 
     for (i = 0; i < strlen(msgBuffer); ++i)     
@@ -77,7 +76,7 @@ int main(int argc, char** argv)
 
 
     send(tmp, (char*)msgBuffer,BUFFER_LENGTH, 0);
-    std::cout << "\nMessage sent: " << msgBuffer << std::endl;
+    printf("\nMessage sent: %s\n", msgBuffer);
   }
 
   
