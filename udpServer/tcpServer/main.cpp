@@ -9,6 +9,7 @@ Copyright   : October 15, 2018
 
 
 #include <stdio.h> 
+#include <ctype.h>
 #include <stdlib.h> 
 #include <unistd.h> 
 #include <string.h> 
@@ -36,6 +37,9 @@ int main(int argc, char** argv)
 
   int         i;
   int         sock;
+  int         client_sock;
+  int         tmp;
+  socklen_t   c;
   char        msgBuffer[256];
   socklen_t   msgLength = sizeof(sockaddr);
   sockaddr_in svr_addr;
@@ -50,9 +54,11 @@ int main(int argc, char** argv)
 
   // create socket and bind to port  
   sock = socket(AF_INET, SOCK_DGRAM, 0);
-  bind(sock, (struct sockaddr*)&svr_addr, sizeof(svr_addr));
-
-
+  tmp = bind(sock, (struct sockaddr*)&svr_addr, sizeof(svr_addr));
+  tmp = listen(sock, 1);
+  printf("\nListening to socket...");
+  client_sock = accept(sock, (sockaddr*)&cli_addr, &c);
+  printf("\nAccepted client...");
 
   while(1)
   {
@@ -60,17 +66,16 @@ int main(int argc, char** argv)
     printf("\n\nWaiting for messages from client...");
     fflush(stdout);
 
-    recvfrom(sock, (char*)msgBuffer, BUFFER_LENGTH, MSG_WAITALL,
-             (struct sockaddr*)&cli_addr, &msgLength);
+    
+    recv(tmp, (char*)msgBuffer, BUFFER_LENGTH, 0);
     printf("\n\nMessage received: %s", msgBuffer);
 
 
     for (i = 0; i < strlen(msgBuffer); ++i)     
-      msgBuffer[i] = toupper(msgBuffer[i]);    
+      msgBuffer[i] = tolower(msgBuffer[i]);    
 
 
-    sendto(sock, (char*)msgBuffer, strlen(msgBuffer), MSG_CONFIRM,
-           (struct sockaddr*)&cli_addr, msgLength);
+    send(tmp, (char*)msgBuffer,BUFFER_LENGTH, 0);
     printf("\nMessage sent: %s\n", msgBuffer);
   }
 

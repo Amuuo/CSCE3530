@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "udpServer", "udpServer\udpServer.vcxproj", "{EA3753E2-CB82-4575-83A3-88C4E3538CBE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tcpServer", "tcpServer\tcpServer.vcxproj", "{FE44F152-42EF-430C-BBE4-BFE59A7F75DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -33,6 +35,22 @@ Global
 		{EA3753E2-CB82-4575-83A3-88C4E3538CBE}.Release|x64.Build.0 = Release|x64
 		{EA3753E2-CB82-4575-83A3-88C4E3538CBE}.Release|x86.ActiveCfg = Release|x86
 		{EA3753E2-CB82-4575-83A3-88C4E3538CBE}.Release|x86.Build.0 = Release|x86
+		{FE44F152-42EF-430C-BBE4-BFE59A7F75DA}.Debug|ARM.ActiveCfg = Debug|ARM
+		{FE44F152-42EF-430C-BBE4-BFE59A7F75DA}.Debug|ARM.Build.0 = Debug|ARM
+		{FE44F152-42EF-430C-BBE4-BFE59A7F75DA}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{FE44F152-42EF-430C-BBE4-BFE59A7F75DA}.Debug|ARM64.Build.0 = Debug|ARM64
+		{FE44F152-42EF-430C-BBE4-BFE59A7F75DA}.Debug|x64.ActiveCfg = Debug|x64
+		{FE44F152-42EF-430C-BBE4-BFE59A7F75DA}.Debug|x64.Build.0 = Debug|x64
+		{FE44F152-42EF-430C-BBE4-BFE59A7F75DA}.Debug|x86.ActiveCfg = Debug|x86
+		{FE44F152-42EF-430C-BBE4-BFE59A7F75DA}.Debug|x86.Build.0 = Debug|x86
+		{FE44F152-42EF-430C-BBE4-BFE59A7F75DA}.Release|ARM.ActiveCfg = Release|ARM
+		{FE44F152-42EF-430C-BBE4-BFE59A7F75DA}.Release|ARM.Build.0 = Release|ARM
+		{FE44F152-42EF-430C-BBE4-BFE59A7F75DA}.Release|ARM64.ActiveCfg = Release|ARM64
+		{FE44F152-42EF-430C-BBE4-BFE59A7F75DA}.Release|ARM64.Build.0 = Release|ARM64
+		{FE44F152-42EF-430C-BBE4-BFE59A7F75DA}.Release|x64.ActiveCfg = Release|x64
+		{FE44F152-42EF-430C-BBE4-BFE59A7F75DA}.Release|x64.Build.0 = Release|x64
+		{FE44F152-42EF-430C-BBE4-BFE59A7F75DA}.Release|x86.ActiveCfg = Release|x86
+		{FE44F152-42EF-430C-BBE4-BFE59A7F75DA}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

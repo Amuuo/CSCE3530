@@ -43,7 +43,7 @@ int main(int argc, char** argv)
   
   // create socket  
   sock = socket(AF_INET, SOCK_DGRAM, 0);
-
+  connect(sock, (sockaddr*)&svr_addr, sizeof(svr_addr));
 
 
 
@@ -54,11 +54,9 @@ int main(int argc, char** argv)
     gets(msgBuffer);     
 
 
-    sendto(sock, (char*)msgBuffer, strlen(msgBuffer)+1, MSG_CONFIRM, 
-           (struct sockaddr*)&svr_addr, sizeof(svr_addr));
+    send(sock, (char*)msgBuffer, BUFFER_LENGTH, 0);
    
-    recvfrom(sock, (char*)msgBuffer, BUFFER_LENGTH, MSG_WAITALL, 
-             (struct sockaddr*)&svr_addr, &msgLength);
+    recv(sock, (char*)msgBuffer, BUFFER_LENGTH, 0);
     
     printf("Server: %s", msgBuffer);
   }
