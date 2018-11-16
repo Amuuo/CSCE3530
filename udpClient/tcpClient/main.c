@@ -60,7 +60,7 @@ int main(int argc, char** argv)
 
     send(sock, (char*)msgBuffer, strlen(msgBuffer), 0);
    
-    recv(sock, (char*)msgBuffer, BUFFER_LENGTH, 0);
+    recv(sock, (char*)msgBuffer, BUFFER_LENGTH, MSG_WAITALL);
     
     printf("Server: %s", msgBuffer);
   }
