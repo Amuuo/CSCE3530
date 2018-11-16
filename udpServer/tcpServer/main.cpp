@@ -67,7 +67,7 @@ int main(int argc, char** argv)
     fflush(stdout);
 
     
-    recv(tmp, (char*)msgBuffer, BUFFER_LENGTH, 0);
+    recv(tmp, (char*)msgBuffer, BUFFER_LENGTH, MSG_WAITALL);
     printf("\n\nMessage received: %s", msgBuffer);
 
 
