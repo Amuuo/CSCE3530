@@ -53,7 +53,7 @@ int main(int argc, char** argv)
 
 
   // create socket and bind to port  
-  sock = socket(AF_INET, SOCK_DGRAM, 0);
+  sock = socket(AF_INET, SOCK_STREAM, 0);
   tmp = bind(sock, (struct sockaddr*)&svr_addr, sizeof(svr_addr));
   tmp = listen(sock, 1);
   printf("\nListening to socket...");
